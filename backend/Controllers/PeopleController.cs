@@ -26,6 +26,18 @@ namespace backend.Controllers
             return Ok(people);
         }
 
+        [HttpDelete("{name}")]
+        public IActionResult DeletePerson(string name)
+        {
+            var person = people.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            if (person == null) return NotFound();
+            people.Remove(person);
+            Console.WriteLine("\nCurrent People List:");
+            Console.WriteLine("---------------------");
+            Console.WriteLine(string.Join("\n", people.Select((p, i) => $"{i+1}. Name: {p.Name}, Age: {p.Age}")));
+            return Ok(people);
+        }
+
     }
 
     // Model for Person

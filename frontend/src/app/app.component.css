@@ -45,4 +45,38 @@ button:hover {
   background: #f9f9f9;
   margin-bottom: 5px;
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-delete {
+  background-color: #f44336; /* Red color for delete */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  visibility: visible;
+}
+
+.btn-delete:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.person-info {
+  flex-grow: 1;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
 }

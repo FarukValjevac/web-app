@@ -17,6 +17,12 @@ export class PersonService {
   addPerson(person: Person): Observable<Person> {
     return this.http.post<Person>(this.apiUrl, person);
   }
+
+  deletePerson(name: string): Observable<Person[]> {
+    return this.http.delete<Person[]>(
+      `${this.apiUrl}/${encodeURIComponent(name)}`
+    );
+  }
 }
 
 export interface Person {

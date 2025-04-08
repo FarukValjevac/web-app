@@ -8,61 +8,7 @@ import { Person } from './persons.service';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <div class="app-container">
-      <header class="app-header">
-        <h1>People Manager</h1>
-      </header>
-
-      <main class="app-main">
-        <div class="form-container">
-          <h2>Add New Person</h2>
-          <form (ngSubmit)="addPerson()">
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input
-                type="text"
-                id="name"
-                [(ngModel)]="newPerson.name"
-                name="name"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="age">Age:</label>
-              <input
-                type="number"
-                id="age"
-                [(ngModel)]="newPerson.age"
-                name="age"
-                required
-              />
-            </div>
-
-            <button type="submit">Add Person</button>
-          </form>
-        </div>
-
-        <div class="people-list">
-          <h2>People List</h2>
-          @if (people.length > 0) {
-          <ul>
-            @for (person of people; track person.name) {
-            <li>{{ person.name }}, {{ person.age }} years old</li>
-            }
-          </ul>
-          } @else {
-          <p>No people added yet.</p>
-          }
-        </div>
-      </main>
-
-      <footer class="app-footer">
-        <p>&copy; FarukValjevac</p>
-      </footer>
-    </div>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
@@ -98,6 +44,19 @@ export class AppComponent implements OnInit {
       error: (err) => {
         console.error('Error adding person:', err);
         alert('Failed to add person. Check console for details.');
+      },
+    });
+  }
+
+  // Delete person from the list by name
+  deletePerson(name: string) {
+    this.personService.deletePerson(name).subscribe({
+      next: (updatedPeople) => {
+        this.people = updatedPeople; // Update the people list after deletion
+      },
+      error: (err) => {
+        console.error('Error deleting person:', err);
+        alert('Failed to delete person. Check console for details.');
       },
     });
   }

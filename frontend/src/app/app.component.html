@@ -9,37 +9,48 @@
       <form (ngSubmit)="addPerson()">
         <div class="form-group">
           <label for="name">Name:</label>
-          <input 
-            type="text" 
-            id="name" 
-            [(ngModel)]="newPerson.name" 
-            name="name" 
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="newPerson.name"
+            name="name"
             required
-          >
+          />
         </div>
-        
+
         <div class="form-group">
           <label for="age">Age:</label>
-          <input 
-            type="number" 
-            id="age" 
-            [(ngModel)]="newPerson.age" 
-            name="age" 
+          <input
+            type="number"
+            id="age"
+            [(ngModel)]="newPerson.age"
+            name="age"
             required
-          >
+          />
         </div>
-        
         <button type="submit">Add Person</button>
       </form>
     </div>
 
     <div class="people-list">
-      <h2>People</h2>
-      <ul>
-        @for (person of people; track person.name) {
-          <li>{{ person.name }}, {{ person.age }} years old</li>
-        }
-      </ul>
+      <h2>People List</h2>
+      <div *ngIf="people.length > 0; else noPeople">
+        <ul>
+          <li *ngFor="let person of people">
+            <span class="person-info">{{ person.name }}, {{ person.age }} years old</span>
+            <button
+              (click)="deletePerson(person.name)"
+              class="btn-delete"
+              title="Delete {{ person.name }}"
+            >
+              ×
+            </button>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noPeople>
+        <p>No people added yet.</p>
+      </ng-template>
     </div>
   </main>
 
