@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     BrowserModule,
-    AppComponent, // Register the standalone component
+    AppComponent, // Standalone component
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent],
