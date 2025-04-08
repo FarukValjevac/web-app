@@ -52,7 +52,8 @@ export class AppComponent implements OnInit {
   deletePerson(name: string) {
     this.personService.deletePerson(name).subscribe({
       next: (updatedPeople) => {
-        this.people = updatedPeople; // Update the people list after deletion
+        // Directly update the people list with the updated list after deletion
+        this.people = updatedPeople; // Update the people list from the backend
       },
       error: (err) => {
         console.error('Error deleting person:', err);
