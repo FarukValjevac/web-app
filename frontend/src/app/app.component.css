@@ -1,0 +1,97 @@
+.form-container {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+.people-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.people-list li {
+  padding: 10px;
+  background: #f9f9f9;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-delete {
+  background-color: #f44336; /* Red color for delete */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  visibility: visible;
+}
+
+.btn-delete:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.person-info {
+  flex-grow: 1;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+}
+
+/* Gender Dropdown */
+select {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/* Add extra margin for gender dropdown */
+.form-group label {
+  margin-bottom: 5px;
+}

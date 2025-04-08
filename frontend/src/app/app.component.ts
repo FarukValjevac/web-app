@@ -1,23 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { HelloService } from './hello.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { PersonService } from './persons.service';
+import { Person } from './persons.service';
 
 @Component({
   selector: 'app-root',
-  template: `<h1>{{ message }}</h1>`,
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  message = '';
+  people: Person[] = [];
+  newPerson: Person = { name: '', surname: '', age: 0, gender: 'No Infos' };
 
-  constructor(private helloService: HelloService) {}
+  constructor(private personService: PersonService) {}
 
   ngOnInit() {
-    // Check if helloService is defined
-    if (this.helloService) {
-      this.helloService.getMessage().subscribe((res) => {
-        this.message = res.message;
-      });
-    } else {
-      console.error('HelloService is undefined');
-    }
+    this.loadPeople();
+  }
+
+  loadPeople() {
+    this.personService.getPeople().subscribe({
+      next: (data) => {
+        this.people = data;
+      },
+      error: (err) => {
+        console.error('Error loading people:', err);
+        alert('Failed to load people. Check console for details.');
+      },
+    });
+  }
+
+  addPerson() {
+    if (!this.newPerson.name.trim()) return;
+
+    this.personService.addPerson(this.newPerson).subscribe({
+      next: (person) => {
+        this.people = [...this.people, person]; // Immutable update
+        this.newPerson = { name: '', surname: '', age: 0, gender: 'No Infos' };
+      },
+      error: (err) => {
+        console.error('Error adding person:', err);
+        alert('Failed to add person. Check console for details.');
+      },
+    });
+  }
+
+  // Delete person from the list by name
+  deletePerson(name: string) {
+    this.personService.deletePerson(name).subscribe({
+      next: (updatedPeople) => {
+        this.people = updatedPeople; // Update the people list after deletion
+      },
+      error: (err) => {
+        console.error('Error deleting person:', err);
+        alert('Failed to delete person. Check console for details.');
+      },
+    });
   }
 }
