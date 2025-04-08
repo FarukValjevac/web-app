@@ -1,23 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { HelloService } from './hello.service';
+import { PersonService, Person } from './persons.service';
 
 @Component({
   selector: 'app-root',
-  template: `<h1>{{ message }}</h1>`,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  message = '';
+  name = '';
+  age: number | null = null;
+  people: Person[] = [];
 
-  constructor(private helloService: HelloService) {}
+  constructor(private personService: PersonService) {}
 
   ngOnInit() {
-    // Check if helloService is defined
-    if (this.helloService) {
-      this.helloService.getMessage().subscribe((res) => {
-        this.message = res.message;
-      });
-    } else {
-      console.error('HelloService is undefined');
-    }
+    this.loadPeople();
+  }
+
+  loadPeople() {
+    this.personService.getPeople().subscribe((res) => {
+      this.people = res;
+    });
+  }
+
+  addPerson() {
+    if (!this.name || this.age === null) return;
+
+    const newPerson: Person = { name: this.name, age: this.age };
+    this.personService.addPerson(newPerson).subscribe(() => {
+      this.loadPeople(); // Refresh list
+      this.name = '';
+      this.age = null;
+    });
   }
 }
