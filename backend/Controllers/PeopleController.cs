@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore; // <-- ADDED for DbContext
-using backend.Data; // <-- ADDED to access AppDbContext
-using backend.Models; // <-- ADDED to access Person model
+using Microsoft.EntityFrameworkCore; 
+using backend.Data; 
+using backend.Models; 
 using System;
 using System.Linq;
 
@@ -33,7 +33,7 @@ namespace backend.Controllers
             // Load once at startup if list is empty
             if (!people.Any())
             {
-                people = _context.People.ToList(); // <-- Loads from DB if people is empty
+                people = _context.People.ToList(); // Loads from DB if people is empty
             }
         }
 
