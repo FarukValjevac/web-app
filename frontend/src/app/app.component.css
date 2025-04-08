@@ -80,3 +80,18 @@ li {
   text-align: center;
   color: #666;
 }
+
+/* Gender Dropdown */
+select {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/* Add extra margin for gender dropdown */
+.form-group label {
+  margin-bottom: 5px;
+}

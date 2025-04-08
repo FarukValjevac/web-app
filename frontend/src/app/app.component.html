@@ -19,6 +19,17 @@
         </div>
 
         <div class="form-group">
+          <label for="name">Surname:</label>
+          <input
+            type="text"
+            id="name"
+            [(ngModel)]="newPerson.surname"
+            name="name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
           <label for="age">Age:</label>
           <input
             type="number"
@@ -28,6 +39,14 @@
             required
           />
         </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" [(ngModel)]="newPerson.gender" name="gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
         <button type="submit">Add Person</button>
       </form>
     </div>
@@ -37,7 +56,7 @@
       <div *ngIf="people.length > 0; else noPeople">
         <ul>
           <li *ngFor="let person of people">
-            <span class="person-info">{{ person.name }}, {{ person.age }} years old</span>
+            <span class="person-info">Name: {{ person.name }}, Surname: {{person.surname}} Age: {{ person.age }}, Gender: {{ person.gender }}</span>
             <button
               (click)="deletePerson(person.name)"
               class="btn-delete"

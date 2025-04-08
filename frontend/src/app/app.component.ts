@@ -13,7 +13,7 @@ import { Person } from './persons.service';
 })
 export class AppComponent implements OnInit {
   people: Person[] = [];
-  newPerson: Person = { name: '', age: 0 };
+  newPerson: Person = { name: '', surname: '', age: 0, gender: 'No Infos' };
 
   constructor(private personService: PersonService) {}
 
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     this.personService.addPerson(this.newPerson).subscribe({
       next: (person) => {
         this.people = [...this.people, person]; // Immutable update
-        this.newPerson = { name: '', age: 0 };
+        this.newPerson = { name: '', surname: '', age: 0, gender: 'No Infos' };
       },
       error: (err) => {
         console.error('Error adding person:', err);

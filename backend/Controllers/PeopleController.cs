@@ -16,7 +16,7 @@ namespace backend.Controllers
             people.Add(person);
             Console.WriteLine("\nCurrent People List:");
             Console.WriteLine("---------------------");
-            Console.WriteLine(string.Join("\n", people.Select((p, i) => $"{i+1}. Name: {p.Name}, Age: {p.Age}")));
+            Console.WriteLine(string.Join("\n", people.Select((p, i) => $"{i+1}. Name: {p.Name}, Age: {p.Age}, Gender: {p.Gender}")));
             return Ok(person);
         }
 
@@ -44,6 +44,8 @@ namespace backend.Controllers
     public class Person
     {
         public string Name { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
         public int Age { get; set; }
+        public string Gender { get; set; } = string.Empty;
     }
 }
