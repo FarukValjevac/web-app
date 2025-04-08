@@ -2,11 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface Person {
-  name: string;
-  age: number;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -22,4 +17,9 @@ export class PersonService {
   addPerson(person: Person): Observable<Person> {
     return this.http.post<Person>(this.apiUrl, person);
   }
+}
+
+export interface Person {
+  name: string;
+  age: number;
 }
