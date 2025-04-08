@@ -1,0 +1,54 @@
+### === Frontend (Angular) === ###
+# Angular build/output
+frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/bazel-out/
+
+# Dependencies
+frontend/node_modules/
+
+# Logs
+frontend/npm-debug.log
+frontend/yarn-error.log
+
+# Angular cache
+frontend/.angular/cache
+
+# Testing
+frontend/coverage/
+frontend/testem.log
+
+frontend/.vscode/
+frontend/!.vscode/settings.json
+frontend/!.vscode/tasks.json
+frontend/!.vscode/launch.json
+frontend/!.vscode/extensions.json
+frontend/.history/*
+
+### === Backend (C#) === ###
+# Add your backend-specific ignores here
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/.vscode/
+*.userprefs
+*.suo
+
+### === Global === ###
+# IDEs and Editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+
+
+# System files
+.DS_Store
+Thumbs.db
+*.log
