@@ -47,6 +47,11 @@ namespace backend.Controllers
             _context.People.Add(person);
             _context.SaveChanges();  // This saves the changes to the DB
 
+            // Check if the people are realy saved in the DB and what the table name is
+            // Console.WriteLine($"People in the DB\n{string.Join("\n", _context.People.Select(p => p.Name).ToList())}");
+            // Console.WriteLine($"Connected to DB: {_context.Database.GetDbConnection().Database}");
+
+
             // Output the list of people to the console (just for debugging purposes)
             PrintPeopleList(people);
             
@@ -94,7 +99,7 @@ namespace backend.Controllers
             if (affectedRows > 0)
             {
                 // Log success
-                Console.WriteLine($"Successfully deleted person: {personDb.Name}");
+                Console.WriteLine($"Successfully deleted person: {personDb.Name} {personDb.Surname}");
                 return Ok(people);
             }
             else
