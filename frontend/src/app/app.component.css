@@ -1,97 +1,110 @@
+/* Container for the form */
 .form-container {
-  background: #f5f5f5;
+  background: #f5f5f5; 
   padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-radius: 8px; 
+  margin-bottom: 20px; 
 }
 
+/* Styling for each form group (form fields) */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 15px; 
 }
 
+/* Styling for form labels */
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  display: block; 
+  margin-bottom: 5px; 
+  font-weight: bold; 
 }
 
+/* Styling for input fields */
 input {
-  width: 100%;
+  width: 100%; 
   padding: 8px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 4px; 
 }
 
+/* Submit button styling */
 button {
-  background-color: #1976d2;
-  color: white;
-  padding: 10px 15px;
-  border: none;
+  background-color: #1976d2; 
+  color: white; 
+  padding: 10px 15px; 
+  border: none; 
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer; 
 }
 
+/* Button hover effect */
 button:hover {
-  background-color: #1565c0;
+  background-color: #1565c0; 
 }
 
+/* List of people styling */
 .people-list ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: none; 
+  padding: 0; 
 }
 
+/* Styling for each person in the list */
 .people-list li {
-  padding: 10px;
-  background: #f9f9f9;
+  padding: 10px; 
+  background: #f9f9f9; 
   margin-bottom: 5px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 4px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
 }
 
+/* General styling for list items */
 li {
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
+  margin-bottom: 8px; 
+  display: flex; 
+  align-items: center; 
 }
 
+/* Delete button styling */
 .btn-delete {
-  background-color: #f44336; /* Red color for delete */
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  margin-left: 10px;
-  visibility: visible;
+  background-color: #f44336;
+  color: white; 
+  padding: 5px 10px; 
+  border: none; 
+  border-radius: 50%; 
+  cursor: pointer; 
+  font-size: 16px; 
+  margin-left: 10px; 
+  visibility: visible; 
 }
 
+/* Delete button hover effect */
 .btn-delete:hover {
-  background-color: #d32f2f; /* Darker red on hover */
+  background-color: #d32f2f; 
 }
 
+/* Styling for person information */
 .person-info {
   flex-grow: 1;
 }
 
+/* Empty message when no people are present */
 .empty-message {
   text-align: center;
-  color: #666;
+  color: #666; 
 }
 
-/* Gender Dropdown */
+/* Gender dropdown styling */
 select {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  padding: 8px;
-  border-radius: 4px;
-  margin-top: 5px;
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  font-size: 16px; 
+  padding: 8px; 
+  border-radius: 4px; 
+  margin-top: 5px; 
 }
 
-/* Add extra margin for gender dropdown */
+/* Additional margin for gender label */
 .form-group label {
-  margin-bottom: 5px;
+  margin-bottom: 5px; 
 }

@@ -1,78 +1,99 @@
 <div class="app-container">
+  <!-- Header Section: Contains the main title of the application -->
   <header class="app-header">
     <h1>People Manager</h1>
   </header>
 
   <main class="app-main">
+    <!-- Form to add a new person to the list -->
     <div class="form-container">
       <h2>Add New Person</h2>
-      <form (ngSubmit)="addPerson()">
+      <form (ngSubmit)="addPerson()"> <!-- Calls addPerson method when form is submitted -->
+        
+        <!-- Name Input: Two-way binding with newPerson.name -->
         <div class="form-group">
           <label for="name">Name:</label>
           <input
             type="text"
             id="name"
-            [(ngModel)]="newPerson.name"
+            [(ngModel)]="newPerson.name"  
             name="name"
             required
           />
         </div>
 
+        <!-- Surname Input: Two-way binding with newPerson.surname -->
         <div class="form-group">
-          <label for="name">Surname:</label>
+          <label for="surname">Surname:</label>
           <input
             type="text"
-            id="name"
+            id="surname"
             [(ngModel)]="newPerson.surname"
-            name="name"
+            name="surname"
             required
           />
         </div>
 
+        <!-- Age Input: Two-way binding with newPerson.age -->
         <div class="form-group">
           <label for="age">Age:</label>
           <input
             type="number"
             id="age"
-            [(ngModel)]="newPerson.age"
+            [(ngModel)]="newPerson.age" 
             name="age"
             required
           />
         </div>
-      <div class="form-group">
-        <label for="gender">Gender:</label>
-        <select id="gender" [(ngModel)]="newPerson.gender" name="gender" required>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+
+        <!-- Gender Dropdown: Two-way binding with newPerson.gender -->
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" [(ngModel)]="newPerson.gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Submit Button: Triggers form submission -->
         <button type="submit">Add Person</button>
       </form>
     </div>
 
+    <!-- Section to display the list of people -->
     <div class="people-list">
       <h2>People List</h2>
+      
+      <!-- Displays the people list if there are people available -->
       <div *ngIf="people.length > 0; else noPeople">
         <ul>
-          <li *ngFor="let person of people">
-            <span class="person-info">Name: {{ person.name }}, Surname: {{person.surname}} Age: {{ person.age }}, Gender: {{ person.gender }}</span>
+          <li *ngFor="let person of people"> <!-- Iterates over the people array -->
+            <span class="person-info">
+              <!-- Displays person information -->
+              Name: {{ person.name }}, Surname: {{ person.surname }} Age: {{ person.age }}, Gender: {{ person.gender }}
+            </span>
+
+            <!-- Delete Button: Calls deletePerson method with person's name -->
             <button
-              (click)="deletePerson(person.name)"
-              class="btn-delete"
+              (click)="deletePerson(person.name)" 
+              class="btn-delete" 
               title="Delete {{ person.name }}"
             >
-              ×
+              × <!-- Represents the delete button with an '×' symbol -->
             </button>
           </li>
         </ul>
       </div>
+
+      <!-- If no people have been added, display this message -->
       <ng-template #noPeople>
         <p>No people added yet.</p>
       </ng-template>
     </div>
   </main>
 
+  <!-- Footer Section: Contains copyright or author information -->
   <footer class="app-footer">
     <p>&copy; FarukValjevac</p>
   </footer>

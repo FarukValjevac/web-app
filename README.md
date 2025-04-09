@@ -1,4 +1,4 @@
-# Project Name
+# Project Description
 
 People manager web app that is able to add\remove people in a table and save them in PostgreSQL.
 

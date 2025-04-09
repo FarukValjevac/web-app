@@ -1,110 +1,113 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore; 
-using backend.Data; 
-using backend.Models; 
+using Microsoft.EntityFrameworkCore;
+using backend.Data;
+using backend.Models;
 using System;
 using System.Linq;
 
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("api/person")]
+    [Route("api/person")] // Route prefix for all endpoints in this controller
     public class PersonController : ControllerBase
     {
-        // In-memory list to store persons (for simplicity)
+        // In-memory list used to store people 
         private static List<Person> people = new();
 
-        // Add _context for the DB
+        // Reference to the EF Core database context
         private readonly AppDbContext _context;
 
+        // Utility method to print the current people list to the console for debugging
         public static void PrintPeopleList(List<Person> people)
         {
-            // Output the list of people to the console (just for debugging purposes)
             Console.WriteLine("\nCurrent People List:");
             Console.WriteLine("---------------------");
-            Console.WriteLine(string.Join("\n", people.Select((p, i) => $"{i + 1}. Name: {p.Name}, Surname: {p.Surname}, Age: {p.Age}, Gender: {p.Gender}")));
+            Console.WriteLine(string.Join("\n", people.Select((p, i) =>
+                $"{i + 1}. Name: {p.Name}, Surname: {p.Surname}, Age: {p.Age}, Gender: {p.Gender}")));
         }
 
+        // Constructor receives the database context through dependency injection
         public PersonController(AppDbContext context)
         {
             _context = context;
 
-            // Load once at startup if list is empty
+            // Load initial people from the database if the list is currently empty
             if (!people.Any())
             {
-                people = _context.People.ToList(); // Loads from DB if people is empty
+                people = _context.People.ToList();
             }
         }
 
+        // POST: api/person
+        // Adds a new person to both the in-memory list and the database
         [HttpPost]
         public IActionResult AddPerson([FromBody] Person person)
         {
-            // Add the person to the in-memory list (this is optional, depending on your logic)
+            // Add to in-memory list 
             people.Add(person);
-            
-            // Add the person to the database
+
+            // Add to the EF Core DbSet and save to the actual database
             _context.People.Add(person);
-            _context.SaveChanges();  // This saves the changes to the DB
+            _context.SaveChanges();
 
-            // Check if the people are realy saved in the DB and what the table name is
-            // Console.WriteLine($"People in the DB\n{string.Join("\n", _context.People.Select(p => p.Name).ToList())}");
-            // Console.WriteLine($"Connected to DB: {_context.Database.GetDbConnection().Database}");
-
-
-            // Output the list of people to the console (just for debugging purposes)
+            // Log the updated list for debugging
             PrintPeopleList(people);
-            
-            return Ok(person);
+
+            return Ok(person); // Return the added person as confirmation
         }
 
+        // GET: api/person
+        // Retrieves the current list of people 
         [HttpGet]
         public IActionResult GetPeople()
         {
             return Ok(people);
         }
 
+        // DELETE: api/person/{name}
+        // Deletes a person by their name from both DB and in-memory list
         [HttpDelete("{name}")]
         public IActionResult DeletePerson(string name)
         {
-            // Fetch the person from the database with case-insensitive comparison
+            // Find the person in the database 
             var personDb = _context.People
                 .FirstOrDefault(p => p.Name.ToLower() == name.ToLower());
 
-            var personList = people.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            // Also find the person in the in-memory list
+            var personList = people
+                .FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-
+            // If person is not found in the database or the list, return 404
             if (personDb == null)
             {
-                // Log that the person was not found
                 Console.WriteLine($"Person with name '{name}' not found.");
                 return NotFound();
             }
 
             if (personList == null) return NotFound();
 
-            // remove person from the list
+            // Remove from the in-memory list
             people.Remove(personList);
-            // Output the list of people to the console (just for debugging purposes)
-            PrintPeopleList(people);
-            // Log the person being deleted
+            PrintPeopleList(people); // Log the updated list
+
             Console.WriteLine($"Deleting person: {personDb.Name}");
 
-            // Remove the person from the database
+            // Remove from the database context
             _context.People.Remove(personDb);
-            
-            // Commit the changes
+
+            // Save the changes to the database
             int affectedRows = _context.SaveChanges();
-            
+
             if (affectedRows > 0)
             {
-                // Log success
+                // Deletion successful
                 Console.WriteLine($"Successfully deleted person: {personDb.Name} {personDb.Surname}");
-                return Ok(people);
+                return Ok(people); // Return updated list
             }
             else
             {
-                // Log failure
+                // Deletion failed
                 Console.WriteLine($"Failed to delete person: {personDb.Name}");
                 return StatusCode(500, "Failed to delete person.");
             }

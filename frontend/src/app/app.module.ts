@@ -5,12 +5,15 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppComponent, // Standalone component
-    FormsModule,
+  // Import necessary Angular modules and components
+  imports: [BrowserModule, AppComponent, FormsModule],
+
+  // Register global providers
+  providers: [
+    provideHttpClient(), // Enables HTTP communication
   ],
-  providers: [provideHttpClient()],
+
+  // Define the root component to bootstrap when the app starts
   bootstrap: [AppComponent],
 })
 export class AppModule {}

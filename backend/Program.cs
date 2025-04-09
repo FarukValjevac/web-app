@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore; // <-- ADDED
-using backend.Data; // <-- ADDED to access AppDbContext
+using Microsoft.EntityFrameworkCore;
+using backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// ================================
+// Configure Services
+// ================================
+
+// Add controller services (API endpoints)
 builder.Services.AddControllers();
 
-// add db context
+// Register the AppDbContext with PostgreSQL connection string
+// This sets up Entity Framework Core to use PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Database=web-app-DB")); 
+    options.UseNpgsql("Host=localhost;Database=web-app-DB"));
 
-
-// Enable CORS
+// Configure CORS policy to allow requests from any origin, method, and header
+// Useful during development or if you expect frontend/backend to run on different domains
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -27,9 +32,15 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Use CORS policy
+// ================================
+// Configure HTTP Request Pipeline
+// ================================
+
+// Apply the CORS policy globally
 app.UseCors("AllowAll");
 
+// Map controller routes (e.g., /api/example)
 app.MapControllers();
 
+// Start the web application
 app.Run();
