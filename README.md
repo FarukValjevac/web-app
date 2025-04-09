@@ -1,6 +1,6 @@
 # Project Name
 
-People manager web app that is able to add\remove people in a table and save them in PostgreSQL. This is just a proof of concept for my job interview.
+People manager web app that is able to add\remove people in a table and save them in PostgreSQL. This is just a proof of concept for my job interview at PKE Holding.
 
 ## Tech Stack
 
